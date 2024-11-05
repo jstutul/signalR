@@ -1,0 +1,32 @@
+Suppose I have 6 user A,B,C,X,Y,Z in my chat application.
+
+Method 1: If i want to boardcast message to all user 
+          await Clients.All.SendAsync("SendMessage",user,message)
+
+Method 2: If i want to Send message sender user (owner of requester)
+          await Clients.Caller.SendAsync("ReceiveMessage",user,message)
+
+Method 3: If i want to Send message Except sender user
+          await Clients.Others.SendAsync("ReceiveMessage",user,message)
+
+Method 4: If i want to Send message Except sender user
+          await Clients.Others.SendAsync("ReceiveMessage",user,message)
+
+Method 5: If i want to Send message From A to B
+          await Clients.Client("Connection B Id").SendAsync("ReceiveMessage",user,message)
+
+
+Method 6: If i want to Send message From A to B,X
+          await Clients.Client("Connection B Id","Connection X Id").SendAsync("ReceiveMessage",user,message)
+
+Method 7: If i want to Send message From A to All Except B,X
+          await Clients.AllExcept("Connection B Id","Connection X Id").SendAsync("ReceiveMessage",user,message)
+
+IF USER LOGIN WITH IDENTITY
+Method 8: If i want to Send message From A to B
+          await Clients.User("b@gmail.com").SendAsync("ReceiveMessage",user,message)
+
+Method 9: If i want to Send message From A to B,X
+          await Clients.Users("b@gmail.com","x@gmail.com").SendAsync("ReceiveMessage",user,message)
+
+
