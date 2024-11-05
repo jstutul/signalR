@@ -1,0 +1,17 @@
+step 1 : add to group
+await Groups.AddToGroupAsync(Context.ConnectionId,"admin");
+
+step 2 : remove from group
+await Groups.RemoveFromGroupAsync(Context.ConnectionId,"admin");
+
+step 3 : send notification to Admin group
+await Clients.Group("admin").SendAsync("ReceiveMessage",user,message);
+
+step 4 : send notification to Admin group without caller
+await Clients.OthersInGroup("admin").SendAsync("ReceiveMessage",user,message);
+
+step 5 : send notification both User &  Admin group 
+await Clients.Groups("admin","user").SendAsync("ReceiveMessage",user,message);
+
+step 6 : send notification  Admin group without specific user
+await Clients.GroupExcept("admin","sam@gmail.com").SendAsync("ReceiveMessage",user,message);
